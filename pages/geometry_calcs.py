@@ -1,7 +1,6 @@
 import streamlit as st
 import math
 
-
 def calculate_na(n: float, theta_deg: float) -> float:
     """Calculate Numerical Aperture from angle in degrees."""
     theta_rad = math.radians(theta_deg)
@@ -20,6 +19,15 @@ def na_to_angle(na: float, n: float) -> tuple[float, float]:
 def geometric_mean(x: float, y: float) -> float:
     """Return geometric mean of two values."""
     return math.sqrt(x * y)
+
+def calculate_reflectance_loss(reflectance: float, reflections: int) -> float:
+    """
+    Calculate total transmitted power fraction after multiple mirror reflections.
+    :param reflectance: mirror reflectivity per bounce (0...1)
+    :param reflections: number of reflections
+    :return: final output fraction (0...1)
+    """
+    return reflectance ** reflections
 
 
 # --- Streamlit UI ---
@@ -56,3 +64,14 @@ if math.isnan(theta_rad2):
     st.error("Invalid input: NA must be ≤ n")
 else:
     st.write(f"**Angle = {theta_rad2:.4f} rad = {theta_deg2:.2f}°**")
+
+st.markdown("---")
+st.header("4. Reflectance Loss Calculator")
+
+reflectance = st.number_input("Mirror reflectance (e.g. 0.95)", min_value=0.0, max_value=1.0, value=0.95, step=0.01)
+reflections = st.number_input("Number of reflections", min_value=0, step=1, value=3)
+
+output_fraction = calculate_reflectance_loss(reflectance, reflections)
+output_percent = output_fraction * 100
+
+st.write(f"**Output power after {reflections} reflections = {output_percent:.2f}%**")
