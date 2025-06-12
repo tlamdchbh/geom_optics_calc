@@ -4,6 +4,9 @@
 **Modular Streamlit app** for optical engineering calculations, including numerical
 aperture (NA), reflectance loss, and Raman shift/spectral range analysis.
 
+## 📖 Online Demo
+https://geomopticscalc-xprbasdi3cfsmhdg3gjc7d.streamlit.app/raman_calc
+
 ## 📦 Features
 
 ### 1. Geometry Calculations (`geometry_calcs.py`)
