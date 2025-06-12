@@ -22,7 +22,6 @@ aperture (NA), reflectance loss, and Raman shift/spectral range analysis.
 ## ▶️ Launch
 
 To run the application:
-
 ```bash
 streamlit run app.py
 ```
